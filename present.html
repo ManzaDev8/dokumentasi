@@ -1,0 +1,2872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#08080c" />
+<title>MANZA-CYBER TEST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<style>
+/* =========================================================
+   MANZA-CYBER TEST — Purple Glass Edition (Final)
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --ink: #08080c;
+  --ink-2: #0c0c14;
+
+  --glass: rgba(24, 18, 42, 0.42);
+  --glass-2: rgba(38, 28, 62, 0.55);
+  --glass-line: rgba(168, 85, 247, 0.16);
+  --glass-line-2: rgba(168, 85, 247, 0.32);
+
+  --primary: #a855f7;
+  --primary-soft: rgba(168, 85, 247, 0.14);
+  --primary-glow: rgba(168, 85, 247, 0.35);
+
+  --secondary: #8b5cf6;
+  --secondary-soft: rgba(139, 92, 246, 0.12);
+
+  --text: #f4f2f8;
+  --text-2: #b8b3c8;
+  --text-dim: #6d6780;
+
+  --ember: #ff6a3d;
+  --sea: #5eead4;
+  --gold: #f5c563;
+  --pink: #ff5ba7;
+
+  --radius: 18px;
+  --radius-sm: 12px;
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-heavy: "Sora", system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--ink);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================
+   BUTTON & LINK BASE OPTIMIZATION
+============================ */
+button, a, .tab, .fab, .cta, .exit, [data-goto] {
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+.tab:focus-visible,
+.fab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============================
+   BACKGROUND
+============================ */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 900px 700px at 20% 0%, rgba(168, 85, 247, 0.14), transparent 60%),
+    radial-gradient(ellipse 800px 600px at 90% 40%, rgba(139, 92, 246, 0.11), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 50% 100%, rgba(168, 85, 247, 0.10), transparent 60%),
+    linear-gradient(180deg, #08080c 0%, #0a0812 50%, #08080c 100%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.38;
+  animation: float 26s ease-in-out infinite;
+  will-change: transform;
+}
+
+.blob:nth-child(1) { width: 520px; height: 520px; background: #a855f7; top: -160px; left: -140px; }
+.blob:nth-child(2) { width: 460px; height: 460px; background: #8b5cf6; top: 22%; right: -160px; animation-delay: -8s; }
+.blob:nth-child(3) { width: 460px; height: 460px; background: #7c3aed; bottom: -180px; left: 26%; animation-delay: -15s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(50px, -40px) scale(1.08); }
+  66%      { transform: translate(-40px, 30px) scale(0.94); }
+}
+
+.grid-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(168, 85, 247, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 78%);
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================
+   SCREEN
+============================ */
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+.screen.on { opacity: 1; visibility: visible; }
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+#login {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.gate {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+}
+
+.gate-marker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  padding-left: 4px;
+  text-transform: uppercase;
+}
+
+/* === Gate Card dengan efek cahaya mutar penuh + glow belakang === */
+.gate-card {
+  position: relative;
+  padding: 42px 34px 30px;
+  border-radius: 26px;
+  background: var(--glass);
+  border: 1px solid var(--glass-line-2);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.7),
+    0 0 80px rgba(168, 85, 247, 0.18),
+    0 0 140px rgba(139, 92, 246, 0.10),
+    inset 0 1px 0 rgba(168, 85, 247, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Layer 1: glow belakang — aura statis lembut */
+.gate-card::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.22), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.18), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.10), transparent 60%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+  animation: auraShift 8s ease-in-out infinite alternate;
+}
+
+@keyframes auraShift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-10px, 10px) rotate(8deg); }
+}
+
+/* Layer 2: border berputar 360° PENUH */
+.gate-card::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 60deg,
+    rgba(168, 85, 247, 0.55) 120deg,
+    rgba(192, 132, 252, 0.85) 150deg,
+    rgba(168, 85, 247, 0.55) 180deg,
+    transparent 240deg,
+    transparent 360deg
+  );
+  animation: spin 8s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+/* Layer 3: inner card untuk membuat efek border tipis */
+.gate-content {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+}
+
+/* Wrap border lebih tegas */
+.gate-card > .gate-content {
+  position: relative;
+}
+
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2.4px;
+  color: var(--primary);
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.18);
+}
+
+.badge i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+.gate-title {
+  font-family: var(--font-heavy);
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.6px;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.gate-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 60%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+}
+
+.gate-sub {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2.4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+
+.in-wrap {
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  background: rgba(8, 8, 16, 0.55);
+  border: 1px solid var(--glass-line);
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.in-wrap:focus-within {
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(168, 85, 247, 0.05);
+  box-shadow:
+    0 0 0 4px rgba(168, 85, 247, 0.08),
+    0 0 24px rgba(168, 85, 247, 0.18);
+}
+
+.in-pw {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 15px 18px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  caret-color: var(--primary);
+  min-width: 0;
+}
+
+.in-pw::placeholder { color: rgba(184, 179, 200, 0.35); letter-spacing: 3px; }
+
+.eye {
+  width: 46px; height: 46px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-right: 3px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.eye:hover { color: var(--primary); background: var(--primary-soft); }
+.eye:active { transform: scale(0.92); }
+.eye svg { width: 18px; height: 18px; }
+.eye .off { display: none; }
+.eye.on .on { display: none; }
+.eye.on .off { display: block; color: var(--primary); }
+
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 24px;
+}
+
+.meter-track {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.meter-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 2px;
+  transition: all 0.35s ease;
+}
+
+.meter-lbl {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 1.8px;
+  color: var(--text-dim);
+  min-width: 88px;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.cta {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(139, 92, 246, 0.14));
+  color: #f4f2f8;
+  font-family: var(--font-heavy);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.28s ease;
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(192, 132, 252, 0.4) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
+}
+
+.cta:hover:not(:disabled)::before { transform: translateX(100%); }
+
+.cta:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.38), rgba(139, 92, 246, 0.24));
+  box-shadow:
+    0 0 30px rgba(168, 85, 247, 0.4),
+    inset 0 0 20px rgba(168, 85, 247, 0.15);
+  transform: translateY(-2px);
+}
+
+.cta:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+.cta:disabled { opacity: 0.6; cursor: wait; }
+
+.log {
+  margin-top: 22px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  background: rgba(4, 4, 10, 0.6);
+  border: 1px solid var(--glass-line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.85;
+  color: var(--text-dim);
+  max-height: 110px;
+  overflow-y: auto;
+}
+
+.log::-webkit-scrollbar { width: 4px; }
+.log::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.35); border-radius: 4px; }
+.log .ln { animation: slideIn .3s ease; }
+@keyframes slideIn { from{opacity:0;transform:translateX(-5px)} to{opacity:1;transform:translateX(0)} }
+.log .arw { color: var(--primary); margin-right: 6px; }
+.log .ok { color: var(--sea); }
+.log .err { color: var(--ember); }
+.log .warn { color: var(--gold); }
+
+.gate-foot {
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  color: var(--text-dim);
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+#dash { overflow-y: auto; }
+
+/* ============================
+   FLOATING TOPBAR
+============================ */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  pointer-events: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heavy);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(20, 14, 36, 0.55);
+  border: 1px solid var(--glass-line);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(168, 85, 247, 0.12);
+  pointer-events: auto;
+}
+
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  box-shadow:
+    0 0 16px rgba(168, 85, 247, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: var(--text-dim);
+  display: none;
+}
+
+/* ============================
+   FLOATING MENU BUTTON (FAB)
+============================ */
+.fab {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 14, 36, 0.65);
+  border: 1px solid var(--glass-line-2);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  color: var(--primary);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(168, 85, 247, 0.25),
+    inset 0 1px 0 rgba(168, 85, 247, 0.2);
+  transition: all 0.35s cubic-bezier(.22, 1, .36, 1);
+  flex-shrink: 0;
+}
+
+.fab:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.55),
+    0 0 45px rgba(168, 85, 247, 0.45),
+    inset 0 1px 0 rgba(168, 85, 247, 0.3);
+}
+
+.fab:active { transform: scale(0.94); }
+
+.fab svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.fab.open svg { transform: rotate(135deg); }
+
+/* ============================
+   FLOATING MENU PANEL
+============================ */
+.menu-panel {
+  position: fixed;
+  top: 82px;
+  right: 20px;
+  width: min(300px, calc(100vw - 40px));
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(18, 12, 34, 0.78);
+  border: 1px solid var(--glass-line-2);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    0 0 60px rgba(168, 85, 247, 0.18),
+    inset 0 1px 0 rgba(168, 85, 247, 0.18);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px) scale(0.94);
+  transform-origin: top right;
+  transition: all 0.32s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+
+.menu-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.menu-panel::-webkit-scrollbar { width: 4px; }
+.menu-panel::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.35);
+  border-radius: 4px;
+}
+
+.menu-head {
+  padding: 6px 12px 14px;
+  border-bottom: 1px solid var(--glass-line);
+  margin-bottom: 10px;
+}
+
+.menu-title {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 2.4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.menu-sub {
+  font-family: var(--font-heavy);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tab {
+  padding: 12px 14px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.tab::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.tab:hover {
+  color: var(--text);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.tab:hover::before { background: var(--primary); }
+
+.tab:active { transform: scale(0.98); }
+
+.tab.active {
+  color: var(--primary);
+  background: rgba(168, 85, 247, 0.14);
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.tab.active::before {
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  transform: scale(1.3);
+}
+
+.menu-divider {
+  height: 1px;
+  background: var(--glass-line);
+  margin: 12px 4px;
+}
+
+.exit {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 106, 61, 0.32);
+  background: rgba(255, 106, 61, 0.08);
+  color: var(--ember);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.exit:hover {
+  background: rgba(255, 106, 61, 0.2);
+  box-shadow: 0 0 22px rgba(255, 106, 61, 0.3);
+}
+
+.exit:active { transform: scale(0.98); }
+
+/* Backdrop */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 98;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: pointer;
+}
+
+.menu-backdrop.on {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 90px 24px 80px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ============================
+   PAGE
+============================ */
+.page { display: none; }
+.page.on { display: block; animation: enter .5s cubic-bezier(.22,1,.36,1); }
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   HERO
+============================ */
+.hero { padding: 10px 0 50px; border-bottom: 1px solid var(--glass-line); margin-bottom: 50px; }
+
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 4px;
+  color: var(--primary);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+}
+
+.hero-tag::before {
+  content: "";
+  width: 26px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary));
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.hero-title {
+  font-family: var(--font-heavy);
+  font-size: clamp(34px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -1.6px;
+  color: var(--text);
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.hero-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 55%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(168, 85, 247, 0.35);
+}
+
+.hero-title .stroke {
+  -webkit-text-stroke: 1px rgba(168, 85, 247, 0.6);
+  color: transparent;
+}
+
+.hero-lead {
+  font-size: 14.5px;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 620px;
+}
+
+/* ============================
+   GLASS CARD
+============================ */
+.glass {
+  position: relative;
+  padding: 24px 22px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(168, 85, 247, 0.1);
+  transition: all 0.35s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+}
+
+a.glass, button.glass-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+
+a.glass:hover, button.glass-link:hover {
+  transform: translateY(-4px);
+  border-color: var(--glass-line-2);
+  background: var(--glass-2);
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(168, 85, 247, 0.18),
+    inset 0 1px 0 rgba(168, 85, 247, 0.22);
+}
+
+a.glass:active, button.glass-link:active { transform: translateY(-1px) scale(0.99); }
+
+.card-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  color: #c084fc;
+}
+
+.card-icon.acid { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.35); color: #c084fc; }
+.card-icon.ember { background: rgba(255, 106, 61, 0.1); border-color: rgba(255, 106, 61, 0.28); color: #ff8c6a; }
+.card-icon.plasma { background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.35); color: #c084fc; }
+.card-icon.sea { background: rgba(94, 234, 212, 0.1); border-color: rgba(94, 234, 212, 0.28); color: #5eead4; }
+.card-icon.pink { background: rgba(255, 91, 167, 0.1); border-color: rgba(255, 91, 167, 0.28); color: #ff7bb8; }
+.card-icon.gold { background: rgba(245, 197, 99, 0.1); border-color: rgba(245, 197, 99, 0.28); color: #f5c563; }
+
+.card-code {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.card-name {
+  font-family: var(--font-heavy);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.card-arrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.6px;
+  color: var(--primary);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.card-arrow span { transition: transform .3s ease; }
+a.glass:hover .card-arrow span,
+button.glass-link:hover .card-arrow span { transform: translateX(5px); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+.tg {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-line);
+  color: var(--text-2);
+}
+
+.tg.acid { color: #c084fc; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.08); }
+.tg.ember { color: #ff8c6a; border-color: rgba(255, 106, 61, 0.3); background: rgba(255, 106, 61, 0.07); }
+.tg.plasma { color: #c084fc; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.08); }
+.tg.sea { color: var(--sea); border-color: rgba(94, 234, 212, 0.3); background: rgba(94, 234, 212, 0.07); }
+.tg.pink { color: #ff7bb8; border-color: rgba(255, 91, 167, 0.3); background: rgba(255, 91, 167, 0.07); }
+.tg.gold { color: var(--gold); border-color: rgba(245, 197, 99, 0.3); background: rgba(245, 197, 99, 0.07); }
+
+/* ============================
+   GRID
+============================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* ============================
+   SECTION
+============================ */
+.block { margin-top: 56px; }
+
+.block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--glass-line);
+  flex-wrap: wrap;
+}
+
+.block-title {
+  font-family: var(--font-heavy);
+  font-size: 24px;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.block-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, #c084fc, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.block-note {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.6px;
+  color: var(--text-dim);
+}
+
+/* ============================
+   CODE BLOCK
+============================ */
+.snippet {
+  margin-top: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-line);
+  background: rgba(6, 4, 12, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+
+.snippet-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--glass-line);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.snippet-top .dots { display: flex; gap: 5px; }
+.snippet-top .dots i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+.snippet-top .dots i:nth-child(1) { background: #ff5f56; }
+.snippet-top .dots i:nth-child(2) { background: #ffbd2e; }
+.snippet-top .dots i:nth-child(3) { background: #27c93f; }
+
+.snippet-body {
+  padding: 16px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: pre;
+  scrollbar-width: thin;
+}
+
+.snippet-body::-webkit-scrollbar { height: 5px; }
+.snippet-body::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.3); border-radius: 4px; }
+
+.snippet-body .cmd { color: #c084fc; }
+.snippet-body .str { color: var(--sea); }
+.snippet-body .cmt { color: var(--text-dim); font-style: italic; }
+.snippet-body .kw { color: #a855f7; }
+.snippet-body .num { color: var(--gold); }
+
+/* ============================
+   TABLE
+============================ */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--glass-line);
+  border-radius: 14px;
+  overflow: hidden;
+  font-size: 12.5px;
+  background: rgba(8, 6, 16, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.tbl thead { background: rgba(168, 85, 247, 0.06); }
+
+.tbl th {
+  padding: 13px 15px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary);
+  border-bottom: 1px solid var(--glass-line);
+}
+
+.tbl td {
+  padding: 12px 15px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--glass-line);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+.tbl tbody tr:last-child td { border-bottom: none; }
+.tbl tbody tr:hover td { background: rgba(168, 85, 247, 0.04); }
+.tbl td strong { color: var(--text); font-weight: 600; }
+.tbl td a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 3px 6px;
+  border-radius: 5px;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.tbl td a:hover {
+  background: rgba(168, 85, 247, 0.12);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+/* ============================
+   STEPS
+============================ */
+.steps { display: flex; flex-direction: column; gap: 12px; }
+
+.step {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all .3s;
+}
+
+.step:hover {
+  border-color: var(--glass-line-2);
+  background: var(--glass-2);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.12);
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heavy);
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.4);
+}
+
+.step-body { flex: 1; min-width: 0; }
+
+.step-title {
+  font-family: var(--font-heavy);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.step-text {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: #c084fc;
+  word-break: break-all;
+}
+
+/* ============================
+   PROFILE
+============================ */
+.profile {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 26px;
+  padding: 30px;
+  border-radius: var(--radius);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .profile { grid-template-columns: 1fr; text-align: center; }
+}
+
+.profile-av {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #a855f7, #8b5cf6, #7c3aed, #c084fc, #a855f7);
+  display: grid;
+  place-items: center;
+  position: relative;
+  animation: rot 9s linear infinite;
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+}
+
+@keyframes rot { to { transform: rotate(360deg); } }
+
+.profile-av::before {
+  content: "M";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #0c0814;
+  color: var(--text);
+  font-family: var(--font-heavy);
+  font-size: 52px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  animation: rot 9s linear infinite reverse;
+}
+
+.profile-name {
+  font-family: var(--font-heavy);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: -0.6px;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.profile-role {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 2.6px;
+  color: var(--primary);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.profile-bio {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ============================
+   FOOTER
+============================ */
+.foot {
+  max-width: 1240px;
+  margin: 70px auto 0;
+  padding: 30px 24px 0;
+  border-top: 1px solid var(--glass-line);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: var(--text-dim);
+}
+
+.foot .acid { color: var(--primary); }
+
+/* ============================
+   SCROLL PROGRESS
+============================ */
+.prog {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 9998;
+  background: linear-gradient(90deg, #a855f7, #8b5cf6, #c084fc);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+  transition: width .12s linear;
+  pointer-events: none;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 860px) {
+  .topbar { padding: 12px 14px; }
+  .brand { font-size: 11px; letter-spacing: 1.4px; padding: 8px 12px; }
+  .brand-mark { width: 22px; height: 22px; font-size: 11px; }
+  .fab { width: 46px; height: 46px; }
+  .fab svg { width: 20px; height: 20px; }
+  .menu-panel { top: 72px; right: 14px; width: calc(100vw - 28px); }
+  .main { padding: 78px 16px 60px; }
+  .block { margin-top: 44px; }
+  .block-title { font-size: 20px; }
+  .hero { padding: 6px 0 36px; margin-bottom: 36px; }
+}
+
+@media (max-width: 480px) {
+  .gate-card { padding: 34px 22px 24px; }
+  .gate-title { font-size: 26px; }
+  .grid, .grid-2 { grid-template-columns: 1fr; }
+  .brand-sub { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<div class="bg-layer">
+  <span class="blob"></span>
+  <span class="blob"></span>
+  <span class="blob"></span>
+</div>
+<div class="grid-lines"></div>
+<div class="noise"></div>
+
+<!-- =========================================================
+     LOGIN
+     ========================================================= -->
+<section id="login" class="screen on">
+  <div class="gate">
+    <div class="gate-marker">MANZA-CYBER TEST // MMXXVI</div>
+
+    <div class="gate-card">
+      <div class="gate-content">
+        <div class="badge"><i></i> Secure Access</div>
+
+        <h1 class="gate-title">MANZA-<em>CYBER TEST</em></h1>
+        <p class="gate-sub">
+          Arsip pribadi: script, Termux, Linux, dan catatan teknis lainnya.
+          Butuh access key untuk masuk.
+        </p>
+
+        <form id="authForm" autocomplete="off" novalidate>
+          <label for="password" class="lbl">Access Key</label>
+
+          <div class="in-wrap">
+            <input
+              type="password"
+              id="password"
+              class="in-pw"
+              placeholder="••••••••"
+              spellcheck="false"
+              autocomplete="new-password"
+              required
+            />
+            <button type="button" id="pwEye" class="eye" aria-label="Toggle">
+              <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="meter">
+            <div class="meter-track"><span id="mFill" class="meter-fill"></span></div>
+            <span id="mText" class="meter-lbl">—</span>
+          </div>
+
+          <button type="submit" class="cta" id="submitBtn">
+            <span id="submitText">Unlock</span>
+          </button>
+        </form>
+
+        <div class="log" id="log" aria-live="polite">
+          <div class="ln"><span class="arw">›</span> session initialized.</div>
+        </div>
+
+        <div class="gate-foot">© MANZA // MMXXVI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     DASHBOARD
+     ========================================================= -->
+<section id="dash" class="screen">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <span>MANZA-CYBER<span class="brand-sub"> TEST</span></span>
+    </div>
+
+    <button class="fab" id="fabBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </svg>
+    </button>
+  </header>
+
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-head">
+      <div class="menu-title">// Navigasi</div>
+      <div class="menu-sub">MANZA-CYBER TEST</div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="tab active" data-page="home">Beranda</button>
+      <button class="tab" data-page="kontak">Kontak</button>
+      <button class="tab" data-page="script">Script</button>
+      <button class="tab" data-page="termux">Termux</button>
+      <button class="tab" data-page="linux">Linux</button>
+      <button class="tab" data-page="tutorial">Tutorial</button>
+      <button class="tab" data-page="tools">Tools</button>
+      <button class="tab" data-page="cheat">Cheatsheet</button>
+      <button class="tab" data-page="about">About</button>
+    </nav>
+
+    <div class="menu-divider"></div>
+
+    <button class="exit" id="exitBtn">EXIT SESSION</button>
+  </div>
+
+  <main class="main">
+
+    <!-- ============================================================
+         HOME
+         ============================================================ -->
+    <div class="page on" id="p-home">
+      <div class="hero">
+        <div class="hero-tag">Cyber Archive — v3.2</div>
+        <h1 class="hero-title">
+          MANZA-<em>CYBER TEST</em><br />
+          <span class="stroke">arsip digital</span>
+        </h1>
+        <p class="hero-lead">
+          Kumpulan script, panduan Termux, tutorial Linux, dan catatan teknis.
+          Semua dalam satu tempat, siap dipakai. Klik kartu untuk membuka link
+          terkait.
+        </p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Akses <em>Cepat</em></h2>
+          <span class="block-note">// klik untuk buka</span>
+        </div>
+
+        <div class="grid">
+          <a class="glass" href="https://whatsapp.com/channel/0029VbD4uxnGE56k4qcTnZ2U" target="_blank" rel="noopener">
+            <div class="card-icon acid">💬</div>
+            <div class="card-code">WHATSAPP</div>
+            <div class="card-name">Saluran WhatsApp</div>
+            <p class="card-desc">Ikuti update script, tutorial, dan info terbaru langsung dari saluran resmi.</p>
+            <div class="card-arrow">Buka Saluran <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://wa.me/6285165918835" target="_blank" rel="noopener">
+            <div class="card-icon sea">📱</div>
+            <div class="card-code">OWNER</div>
+            <div class="card-name">Chat Owner</div>
+            <p class="card-desc">Hubungi owner langsung via WhatsApp: 085165918835.</p>
+            <div class="card-arrow">Chat Sekarang <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://www.mediafire.com/file/yz9gpd3qsrpn7tz/MANZFIX4.2.PY/file" target="_blank" rel="noopener">
+            <div class="card-icon ember">📦</div>
+            <div class="card-code">MEDIAFIRE</div>
+            <div class="card-name">Script Trial — MANZFIX 4.2</div>
+            <p class="card-desc">Download script trial MANZFIX 4.2 (.PY) dari MediaFire.</p>
+            <div class="card-arrow">Download <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener">
+            <div class="card-icon plasma">🐧</div>
+            <div class="card-code">F-DROID</div>
+            <div class="card-name">Termux APK</div>
+            <p class="card-desc">Download Termux versi resmi dari F-Droid. Jangan pakai versi Play Store.</p>
+            <div class="card-arrow">Download <span>→</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Peta <em>Arsip</em></h2>
+          <span class="block-note">// kategori</span>
+        </div>
+
+        <div class="grid">
+          <a class="glass" href="#" data-goto="kontak">
+            <div class="card-icon pink">📡</div>
+            <div class="card-code">01 / KONTAK</div>
+            <div class="card-name">Kontak & Sosial</div>
+            <p class="card-desc">WhatsApp channel, owner, dan link komunikasi lainnya.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+
+          <a class="glass" href="#" data-goto="script">
+            <div class="card-icon gold">📜</div>
+            <div class="card-code">02 / SCRIPT</div>
+            <div class="card-name">Script & Tools</div>
+            <p class="card-desc">Kumpulan script Python, trial, dan utility pendukung.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+
+          <a class="glass" href="#" data-goto="termux">
+            <div class="card-icon acid">⌨️</div>
+            <div class="card-code">03 / TERMUX</div>
+            <div class="card-name">Termux Guide</div>
+            <p class="card-desc">Install, setup, dan pakai Termux dari nol sampai mahir.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+
+          <a class="glass" href="#" data-goto="linux">
+            <div class="card-icon ember">🐲</div>
+            <div class="card-code">04 / LINUX</div>
+            <div class="card-name">Linux di Android</div>
+            <p class="card-desc">Kali Linux, NetHunter, dan distro lain via proot-distro.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+
+          <a class="glass" href="#" data-goto="tutorial">
+            <div class="card-icon sea">📚</div>
+            <div class="card-code">05 / TUTORIAL</div>
+            <div class="card-name">Tutorial Dasar</div>
+            <p class="card-desc">Langkah demi langkah dari instalasi sampai pakai harian.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+
+          <a class="glass" href="#" data-goto="tools">
+            <div class="card-icon plasma">🧰</div>
+            <div class="card-code">06 / TOOLS</div>
+            <div class="card-name">Tool Pendukung</div>
+            <p class="card-desc">Termux:X11, NetHunter Store, dan APK pendukung lain.</p>
+            <div class="card-arrow">Lihat <span>→</span></div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         KONTAK
+         ============================================================ -->
+    <div class="page" id="p-kontak">
+      <div class="hero">
+        <div class="hero-tag">Section 01 — Kontak</div>
+        <h1 class="hero-title">Hubungi <em>& Ikuti</em>.</h1>
+        <p class="hero-lead">Saluran WhatsApp untuk update, dan kontak owner untuk pertanyaan langsung.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Saluran <em>WhatsApp</em></h2>
+          <span class="block-note">// update & info</span>
+        </div>
+
+        <div class="grid-2">
+          <a class="glass" href="https://whatsapp.com/channel/0029VbD4uxnGE56k4qcTnZ2U" target="_blank" rel="noopener">
+            <div class="card-icon acid">💬</div>
+            <div class="card-code">WHATSAPP CHANNEL</div>
+            <div class="card-name">Saluran Resmi</div>
+            <p class="card-desc">
+              Ikuti saluran untuk mendapatkan update script, tutorial baru,
+              dan pengumuman penting. Klik untuk membuka di WhatsApp.
+            </p>
+            <div class="card-arrow">Buka Saluran <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg acid">Update</span>
+              <span class="tg">Script</span>
+              <span class="tg">Tutorial</span>
+            </div>
+          </a>
+
+          <a class="glass" href="https://wa.me/6285165918835" target="_blank" rel="noopener">
+            <div class="card-icon sea">📱</div>
+            <div class="card-code">OWNER</div>
+            <div class="card-name">Chat Pribadi</div>
+            <p class="card-desc">
+              Hubungi owner langsung via WhatsApp untuk pertanyaan, bantuan,
+              atau kerjasama. Nomor: 085165918835.
+            </p>
+            <div class="card-arrow">Chat Owner <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg sea">Support</span>
+              <span class="tg">Owner</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Info <em>Kontak</em></h2>
+          <span class="block-note">// detail</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr><th>Kanal</th><th>Detail</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>WhatsApp Channel</strong></td>
+              <td>0029VbD4uxnGE56k4qcTnZ2U</td>
+              <td><a href="https://whatsapp.com/channel/0029VbD4uxnGE56k4qcTnZ2U" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Owner</strong></td>
+              <td>085165918835</td>
+              <td><a href="https://wa.me/6285165918835" target="_blank" rel="noopener">Chat →</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         SCRIPT
+         ============================================================ -->
+    <div class="page" id="p-script">
+      <div class="hero">
+        <div class="hero-tag">Section 02 — Script</div>
+        <h1 class="hero-title">Script <em>& Tools</em>.</h1>
+        <p class="hero-lead">Kumpulan script yang bisa diunduh. Klik kartu untuk membuka link download.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Script <em>Trial</em></h2>
+          <span class="block-note">// mediafire</span>
+        </div>
+
+        <div class="grid-2">
+          <a class="glass" href="https://www.mediafire.com/file/yz9gpd3qsrpn7tz/MANZFIX4.2.PY/file" target="_blank" rel="noopener">
+            <div class="card-icon ember">📦</div>
+            <div class="card-code">MANZFIX 4.2</div>
+            <div class="card-name">MANZFIX 4.2 (.PY)</div>
+            <p class="card-desc">
+              Script Python versi trial. Diunduh dari MediaFire. Baca dokumentasi
+              sebelum menjalankan.
+            </p>
+            <div class="card-arrow">Download di MediaFire <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg ember">Python</span>
+              <span class="tg">Trial</span>
+              <span class="tg gold">.PY</span>
+            </div>
+          </a>
+
+          <div class="glass">
+            <div class="card-icon gold">⚙️</div>
+            <div class="card-code">CARA PAKAI</div>
+            <div class="card-name">Setup Script Python</div>
+            <p class="card-desc">
+              Setelah download, pindahkan ke Termux, install Python, lalu
+              jalankan script. Detail di bawah.
+            </p>
+            <div class="card-arrow">Lihat Panduan <span>→</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Cara <em>Menjalankan</em></h2>
+          <span class="block-note">// di termux</span>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Install Python</div>
+              <div class="step-text">
+                Buka Termux, jalankan <span class="inline-code">pkg install python -y</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Pindah ke folder Download</div>
+              <div class="step-text">
+                Jalankan <span class="inline-code">termux-setup-storage</span> lalu
+                <span class="inline-code">cd /sdcard/Download</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Jalankan script</div>
+              <div class="step-text">
+                Ketik <span class="inline-code">python MANZFIX4.2.PY</span> dan tekan Enter.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>termux — jalankan script</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># 1. install python</span>
+<span class="cmd">pkg</span> install python -y
+
+<span class="cmt"># 2. izinkan akses storage</span>
+<span class="cmd">termux-setup-storage</span>
+
+<span class="cmt"># 3. masuk ke folder download</span>
+<span class="cmd">cd</span> /sdcard/Download
+
+<span class="cmt"># 4. jalankan script</span>
+<span class="cmd">python</span> MANZFIX4.2.PY</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         TERMUX
+         ============================================================ -->
+    <div class="page" id="p-termux">
+      <div class="hero">
+        <div class="hero-tag">Section 03 — Termux</div>
+        <h1 class="hero-title">Termux <em>Guide</em>.</h1>
+        <p class="hero-lead">Dari install sampai mahir. Semua link dan perintah yang kamu butuhkan.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Download <em>Termux</em></h2>
+          <span class="block-note">// pilih salah satu</span>
+        </div>
+
+        <div class="grid-2">
+          <a class="glass" href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener">
+            <div class="card-icon acid">🟢</div>
+            <div class="card-code">F-DROID — RECOMMENDED</div>
+            <div class="card-name">Termux di F-Droid</div>
+            <p class="card-desc">
+              Sumber resmi dan direkomendasikan. Dapat update otomatis
+              lewat klien F-Droid.
+            </p>
+            <div class="card-arrow">Buka F-Droid <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg acid">Recommended</span>
+              <span class="tg">Resmi</span>
+            </div>
+          </a>
+
+          <a class="glass" href="https://github.com/termux/termux-app/releases" target="_blank" rel="noopener">
+            <div class="card-icon plasma">⚫</div>
+            <div class="card-code">GITHUB RELEASES</div>
+            <div class="card-name">Termux di GitHub</div>
+            <p class="card-desc">
+              Versi terbaru langsung dari repositori resmi Termux di GitHub.
+            </p>
+            <div class="card-arrow">Buka GitHub <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg plasma">GitHub</span>
+              <span class="tg">APK</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="glass" style="margin-top:14px">
+          <div class="card-icon ember">⚠️</div>
+          <div class="card-code">PENTING</div>
+          <div class="card-name">Jangan pakai versi Play Store</div>
+          <p class="card-desc">
+            Versi Termux di Google Play Store sudah usang dan tidak lagi
+            diperbarui. Selalu gunakan F-Droid atau GitHub Releases.
+          </p>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Setup <em>Awal</em></h2>
+          <span class="block-note">// 4 langkah</span>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Update & Upgrade</div>
+              <div class="step-text">
+                Jalankan <span class="inline-code">pkg update && pkg upgrade -y</span>
+                untuk memperbarui repositori dan paket.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Izinkan Akses Storage</div>
+              <div class="step-text">
+                Jalankan <span class="inline-code">termux-setup-storage</span> lalu
+                tap Allow. Ini memberi akses ke folder Download, DCIM, dll.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Install Paket Esensial</div>
+              <div class="step-text">
+                <span class="inline-code">pkg install git wget curl python proot-distro -y</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Perbaiki Mirror (jika lambat)</div>
+              <div class="step-text">
+                Jika download lambat, jalankan <span class="inline-code">termux-change-repo</span>
+                dan pilih mirror yang lebih dekat.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>termux — setup lengkap</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># update repositori</span>
+<span class="cmd">pkg</span> update && <span class="cmd">pkg</span> upgrade -y
+
+<span class="cmt"># akses storage</span>
+<span class="cmd">termux-setup-storage</span>
+
+<span class="cmt"># paket dasar</span>
+<span class="cmd">pkg</span> install <span class="str">git</span> <span class="str">wget</span> <span class="str">curl</span> <span class="str">nano</span> -y
+
+<span class="cmt"># bahasa pemrograman</span>
+<span class="cmd">pkg</span> install <span class="str">python</span> <span class="str">nodejs</span> -y
+
+<span class="cmt"># proot-distro untuk Linux</span>
+<span class="cmd">pkg</span> install <span class="str">proot-distro</span> -y
+
+<span class="cmt"># ganti mirror jika lambat</span>
+<span class="cmd">termux-change-repo</span></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Command <em>Dasar</em></h2>
+          <span class="block-note">// wajib tahu</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr><th>Command</th><th>Fungsi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>pkg update</strong></td><td>Update daftar paket</td></tr>
+            <tr><td><strong>pkg upgrade</strong></td><td>Update semua paket terinstal</td></tr>
+            <tr><td><strong>pkg install [nama]</strong></td><td>Install paket</td></tr>
+            <tr><td><strong>pkg uninstall [nama]</strong></td><td>Hapus paket</td></tr>
+            <tr><td><strong>ls</strong></td><td>Lihat isi direktori</td></tr>
+            <tr><td><strong>cd [folder]</strong></td><td>Pindah direktori</td></tr>
+            <tr><td><strong>cp / mv / rm</strong></td><td>Copy / pindah / hapus file</td></tr>
+            <tr><td><strong>nano [file]</strong></td><td>Edit file teks</td></tr>
+            <tr><td><strong>exit</strong></td><td>Keluar dari Termux / sesi</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         LINUX
+         ============================================================ -->
+    <div class="page" id="p-linux">
+      <div class="hero">
+        <div class="hero-tag">Section 04 — Linux</div>
+        <h1 class="hero-title">Linux <em>di Android</em>.</h1>
+        <p class="hero-lead">Kali Linux, NetHunter, Ubuntu, dan distro lain lewat proot-distro. Tanpa root.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Metode <em>Instalasi</em></h2>
+          <span class="block-note">// pilih satu</span>
+        </div>
+
+        <div class="grid-2">
+          <a class="glass" href="https://github.com/Anon4You/kalilinux" target="_blank" rel="noopener">
+            <div class="card-icon ember">🐲</div>
+            <div class="card-code">PROOT-DISTRO</div>
+            <div class="card-name">Kali Linux + XFCE4</div>
+            <p class="card-desc">
+              Script otomatis install Kali Rolling dengan desktop XFCE4.
+              Tanpa root, pakai proot-distro.
+            </p>
+            <div class="card-arrow">Buka Repo <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg ember">Kali</span>
+              <span class="tg">XFCE4</span>
+              <span class="tg acid">No Root</span>
+            </div>
+          </a>
+
+          <a class="glass" href="https://www.kali.org/docs/nethunter/nethunter-rootless/" target="_blank" rel="noopener">
+            <div class="card-icon acid">🛡️</div>
+            <div class="card-code">NETHUNTER ROOTLESS</div>
+            <div class="card-name">Kali NetHunter</div>
+            <p class="card-desc">
+              NetHunter versi rootless untuk perangkat Android biasa.
+              Dokumentasi resmi dari Kali.org.
+            </p>
+            <div class="card-arrow">Baca Docs <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg acid">Resmi</span>
+              <span class="tg">NetHunter</span>
+            </div>
+          </a>
+
+          <a class="glass" href="https://github.com/newgsmbx/termux-linux-setup" target="_blank" rel="noopener">
+            <div class="card-icon sea">🐧</div>
+            <div class="card-code">MULTI-DISTRO</div>
+            <div class="card-name">Termux Linux Setup</div>
+            <p class="card-desc">
+              Script setup Linux desktop (XFCE4, LXQt, MATE, KDE) dengan
+              GPU acceleration dan audio.
+            </p>
+            <div class="card-arrow">Buka Repo <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg sea">Multi</span>
+              <span class="tg">GPU</span>
+            </div>
+          </a>
+
+          <a class="glass" href="https://github.com/termux/termux-x11/releases" target="_blank" rel="noopener">
+            <div class="card-icon plasma">🖥️</div>
+            <div class="card-code">DISPLAY SERVER</div>
+            <div class="card-name">Termux:X11</div>
+            <p class="card-desc">
+              Aplikasi companion untuk menampilkan desktop Linux.
+              Diperlukan untuk GUI.
+            </p>
+            <div class="card-arrow">Download APK <span>→</span></div>
+            <div class="tag-row">
+              <span class="tg plasma">X11</span>
+              <span class="tg">GUI</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Install <em>Kali Linux</em></h2>
+          <span class="block-note">// proot-distro</span>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Install proot-distro</div>
+              <div class="step-text">
+                <span class="inline-code">pkg install proot-distro -y</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Install Kali</div>
+              <div class="step-text">
+                <span class="inline-code">proot-distro install kali</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Login ke Kali</div>
+              <div class="step-text">
+                <span class="inline-code">proot-distro login kali</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Update di dalam Kali</div>
+              <div class="step-text">
+                <span class="inline-code">apt update && apt upgrade -y</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Install desktop (opsional)</div>
+              <div class="step-text">
+                <span class="inline-code">apt install kali-desktop-xfce -y</span>
+                lalu jalankan <span class="inline-code">startxfce4</span> lewat Termux:X11.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>termux — kali linux</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># install proot-distro</span>
+<span class="cmd">pkg</span> install proot-distro -y
+
+<span class="cmt"># install kali rolling</span>
+<span class="cmd">proot-distro</span> install kali
+
+<span class="cmt"># login ke kali</span>
+<span class="cmd">proot-distro</span> login kali
+
+<span class="cmt"># di dalam kali: update</span>
+<span class="cmd">apt</span> update && <span class="cmd">apt</span> upgrade -y
+
+<span class="cmt"># install desktop xfce4</span>
+<span class="cmd">apt</span> install kali-desktop-xfce -y
+
+<span class="cmt"># keluar</span>
+<span class="cmd">exit</span></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Distro <em>Lain</em></h2>
+          <span class="block-note">// proot-distro</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr><th>Distro</th><th>Command Install</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Kali Linux</strong></td><td>proot-distro install kali</td></tr>
+            <tr><td><strong>Ubuntu</strong></td><td>proot-distro install ubuntu</td></tr>
+            <tr><td><strong>Debian</strong></td><td>proot-distro install debian</td></tr>
+            <tr><td><strong>Arch Linux</strong></td><td>proot-distro install archlinux</td></tr>
+            <tr><td><strong>Alpine</strong></td><td>proot-distro install alpine</td></tr>
+            <tr><td><strong>Fedora</strong></td><td>proot-distro install fedora</td></tr>
+            <tr><td><strong>Void Linux</strong></td><td>proot-distro install void</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         TUTORIAL
+         ============================================================ -->
+    <div class="page" id="p-tutorial">
+      <div class="hero">
+        <div class="hero-tag">Section 05 — Tutorial</div>
+        <h1 class="hero-title">Tutorial <em>Dasar</em>.</h1>
+        <p class="hero-lead">Panduan langkah demi langkah untuk pemula. Dari install sampai pakai harian.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Alur <em>Belajar</em></h2>
+          <span class="block-note">// roadmap</span>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Install F-Droid & Termux</div>
+              <div class="step-text">
+                Download F-Droid dari situs resmi, install, lalu cari
+                "Termux" di dalam F-Droid dan install.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Setup Awal</div>
+              <div class="step-text">
+                Update paket, izinkan storage, install tools dasar.
+                Detail di halaman Termux.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Pelajari Command Dasar</div>
+              <div class="step-text">
+                Kuasai <span class="inline-code">ls</span>, <span class="inline-code">cd</span>,
+                <span class="inline-code">cp</span>, <span class="inline-code">mv</span>,
+                <span class="inline-code">rm</span>, dan <span class="inline-code">nano</span>.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Install Bahasa Pemrograman</div>
+              <div class="step-text">
+                <span class="inline-code">pkg install python nodejs -y</span>
+                lalu coba tulis script sederhana.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Coba Linux via proot-distro</div>
+              <div class="step-text">
+                Install Kali atau Ubuntu dengan proot-distro, lalu eksplor
+                command Linux di dalamnya.
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-body">
+              <div class="step-title">Eksplor GUI (Opsional)</div>
+              <div class="step-text">
+                Install Termux:X11 dan desktop environment untuk pengalaman
+                Linux grafis di HP.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Tips <em>Pemula</em></h2>
+          <span class="block-note">// biar lancar</span>
+        </div>
+
+        <div class="grid">
+          <div class="glass">
+            <div class="card-icon acid">💡</div>
+            <div class="card-code">TIP 01</div>
+            <div class="card-name">Jangan pakai Play Store</div>
+            <p class="card-desc">
+              Versi Play Store usang. Selalu pakai F-Droid atau GitHub.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon sea">🔋</div>
+            <div class="card-code">TIP 02</div>
+            <div class="card-name">Matikan battery optimization</div>
+            <p class="card-desc">
+              Agar Termux tidak dimatikan paksa oleh Android saat berjalan
+              di background.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon gold">📶</div>
+            <div class="card-code">TIP 03</div>
+            <div class="card-name">Ganti mirror jika lambat</div>
+            <p class="card-desc">
+              Jalankan <span class="inline-code">termux-change-repo</span>
+              dan pilih mirror terdekat.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon ember">💾</div>
+            <div class="card-code">TIP 04</div>
+            <div class="card-name">Siapkan storage</div>
+            <p class="card-desc">
+              Linux di proot butuh ruang. Sisakan minimal 2-3 GB kosong.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon plasma">🔐</div>
+            <div class="card-code">TIP 05</div>
+            <div class="card-name">Aktifkan password</div>
+            <p class="card-desc">
+              Untuk Kali, ganti password default <span class="inline-code">kali</span>
+              dengan <span class="inline-code">passwd</span>.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon pink">📚</div>
+            <div class="card-code">TIP 06</div>
+            <div class="card-name">Baca dokumentasi resmi</div>
+            <p class="card-desc">
+              Selalu cek dokumentasi resmi sebelum mengikuti tutorial
+              pihak ketiga.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         TOOLS
+         ============================================================ -->
+    <div class="page" id="p-tools">
+      <div class="hero">
+        <div class="hero-tag">Section 06 — Tools</div>
+        <h1 class="hero-title">Tool <em>Pendukung</em>.</h1>
+        <p class="hero-lead">APK dan tool tambahan yang sering dipakai bareng Termux.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">APK <em>Pendukung</em></h2>
+          <span class="block-note">// download</span>
+        </div>
+
+        <div class="grid-2">
+          <a class="glass" href="https://f-droid.org/" target="_blank" rel="noopener">
+            <div class="card-icon acid">🟢</div>
+            <div class="card-code">F-DROID</div>
+            <div class="card-name">F-Droid Client</div>
+            <p class="card-desc">
+              Toko aplikasi open-source. Sumber utama untuk download Termux
+              dan aplikasi FOSS lain.
+            </p>
+            <div class="card-arrow">Buka F-Droid <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://github.com/termux/termux-x11/releases" target="_blank" rel="noopener">
+            <div class="card-icon plasma">🖥️</div>
+            <div class="card-code">TERMUX:X11</div>
+            <div class="card-name">Termux:X11</div>
+            <p class="card-desc">
+              Display server untuk menjalankan GUI Linux. Wajib untuk
+              desktop environment.
+            </p>
+            <div class="card-arrow">Download <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://store.nethunter.com/" target="_blank" rel="noopener">
+            <div class="card-icon ember">🛡️</div>
+            <div class="card-code">NETHUNTER STORE</div>
+            <div class="card-name">NetHunter Store</div>
+            <p class="card-desc">
+              Toko aplikasi resmi Kali NetHunter. Berisi Termux versi
+              NetHunter, NetHunter-KeX, dan lainnya.
+            </p>
+            <div class="card-arrow">Buka Store <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://f-droid.org/packages/com.termux.api/" target="_blank" rel="noopener">
+            <div class="card-icon sea">📡</div>
+            <div class="card-code">TERMUX:API</div>
+            <div class="card-name">Termux:API</div>
+            <p class="card-desc">
+              Akses fitur Android dari Termux: kamera, SMS, lokasi,
+              clipboard, dan lainnya.
+            </p>
+            <div class="card-arrow">Download <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://www.kali.org/docs/nethunter/nethunter-rootless/" target="_blank" rel="noopener">
+            <div class="card-icon gold">📖</div>
+            <div class="card-code">DOKUMENTASI</div>
+            <div class="card-name">Kali NetHunter Docs</div>
+            <p class="card-desc">
+              Panduan resmi instalasi NetHunter rootless dari Kali.org.
+            </p>
+            <div class="card-arrow">Baca Docs <span>→</span></div>
+          </a>
+
+          <a class="glass" href="https://github.com/mikey-7x/About-Termux" target="_blank" rel="noopener">
+            <div class="card-icon pink">📚</div>
+            <div class="card-code">GUIDE</div>
+            <div class="card-name">Termux Complete Guide</div>
+            <p class="card-desc">
+              Panduan lengkap Termux dari pemula sampai power user di GitHub.
+            </p>
+            <div class="card-arrow">Buka Guide <span>→</span></div>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         CHEATSHEET
+         ============================================================ -->
+    <div class="page" id="p-cheat">
+      <div class="hero">
+        <div class="hero-tag">Section 07 — Cheatsheet</div>
+        <h1 class="hero-title">Cheat <em>Sheet</em>.</h1>
+        <p class="hero-lead">Referensi cepat untuk command yang sering dipakai di Termux.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Package <em>Manager</em></h2>
+          <span class="block-note">// pkg</span>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>termux — pkg</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># update & upgrade</span>
+<span class="cmd">pkg</span> update && <span class="cmd">pkg</span> upgrade -y
+
+<span class="cmt"># install paket</span>
+<span class="cmd">pkg</span> install <span class="str">git</span> <span class="str">python</span> <span class="str">nodejs</span> -y
+
+<span class="cmt"># hapus paket</span>
+<span class="cmd">pkg</span> uninstall <span class="str">nodejs</span>
+
+<span class="cmt"># cari paket</span>
+<span class="cmd">pkg</span> search <span class="str">python</span>
+
+<span class="cmt"># lihat info paket</span>
+<span class="cmd">pkg</span> show <span class="str">python</span>
+
+<span class="cmt"># bersihkan cache</span>
+<span class="cmd">pkg</span> clean</div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">File & <em>Folder</em></h2>
+          <span class="block-note">// navigasi</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr><th>Command</th><th>Fungsi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ls -la</strong></td><td>List semua file, detail</td></tr>
+            <tr><td><strong>cd [folder]</strong></td><td>Masuk folder</td></tr>
+            <tr><td><strong>cd ..</strong></td><td>Naik satu level</td></tr>
+            <tr><td><strong>pwd</strong></td><td>Tampilkan direktori sekarang</td></tr>
+            <tr><td><strong>mkdir [nama]</strong></td><td>Buat folder baru</td></tr>
+            <tr><td><strong>rm -rf [nama]</strong></td><td>Hapus folder rekursif</td></tr>
+            <tr><td><strong>cp -r [src] [dst]</strong></td><td>Copy rekursif</td></tr>
+            <tr><td><strong>mv [src] [dst]</strong></td><td>Pindah / rename</td></tr>
+            <tr><td><strong>cat [file]</strong></td><td>Tampilkan isi file</td></tr>
+            <tr><td><strong>nano [file]</strong></td><td>Edit file teks</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Proot <em>Distro</em></h2>
+          <span class="block-note">// linux container</span>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>termux — proot-distro</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># install proot-distro</span>
+<span class="cmd">pkg</span> install proot-distro -y
+
+<span class="cmt"># lihat distro tersedia</span>
+<span class="cmd">proot-distro</span> list
+
+<span class="cmt"># install distro</span>
+<span class="cmd">proot-distro</span> install kali
+<span class="cmd">proot-distro</span> install ubuntu
+
+<span class="cmt"># login</span>
+<span class="cmd">proot-distro</span> login kali
+
+<span class="cmt"># lihat distro terinstal</span>
+<span class="cmd">proot-distro</span> list --installed
+
+<span class="cmt"># hapus distro</span>
+<span class="cmd">proot-distro</span> remove kali</div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Git <em>Dasar</em></h2>
+          <span class="block-note">// clone & update</span>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span>git — daily</span>
+          </div>
+          <div class="snippet-body"><span class="cmt"># clone repo</span>
+<span class="cmd">git</span> clone https://github.com/user/repo.git
+
+<span class="cmt"># masuk folder</span>
+<span class="cmd">cd</span> repo
+
+<span class="cmt"># update lokal</span>
+<span class="cmd">git</span> pull
+
+<span class="cmt"># lihat status</span>
+<span class="cmd">git</span> status
+
+<span class="cmt"># lihat log</span>
+<span class="cmd">git</span> log --oneline -10</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================
+         ABOUT
+         ============================================================ -->
+    <div class="page" id="p-about">
+      <div class="hero">
+        <div class="hero-tag">Section 08 — About</div>
+        <h1 class="hero-title">Tentang <em>Arsip</em>.</h1>
+        <p class="hero-lead">Kumpulan catatan pribadi. Selalu verifikasi dengan dokumentasi resmi.</p>
+      </div>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Profil</h2>
+          <span class="block-note">// meta</span>
+        </div>
+
+        <div class="profile">
+          <div class="profile-av"></div>
+          <div>
+            <div class="profile-name">Manza</div>
+            <div class="profile-role">// Cyber Archive Curator</div>
+            <p class="profile-bio">
+              Menyusun catatan teknis seputar Termux, Linux, dan tooling.
+              Fokus pada panduan yang bisa langsung dipraktikkan dan
+              link yang bisa diakses.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Meta <em>Info</em></h2>
+          <span class="block-note">// arsip</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass">
+            <div class="card-icon acid">📊</div>
+            <div class="card-code">STATISTIK</div>
+            <div class="card-name">Info Arsip</div>
+            <p class="card-desc">
+              Versi 3.2 · Rilis 26.09.2026 · 9 section · 40+ link akses.
+            </p>
+          </div>
+
+          <div class="glass">
+            <div class="card-icon ember">⚠️</div>
+            <div class="card-code">DISCLAIMER</div>
+            <div class="card-name">Catatan</div>
+            <p class="card-desc">
+              Semua link eksternal milik pihak ketiga. Gunakan dengan
+              tanggung jawab sendiri. Selalu verifikasi dokumentasi resmi.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-head">
+          <h2 class="block-title">Link <em>Cepat</em></h2>
+          <span class="block-note">// semua akses</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr><th>Tujuan</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Saluran WhatsApp</strong></td>
+              <td><a href="https://whatsapp.com/channel/0029VbD4uxnGE56k4qcTnZ2U" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Owner WhatsApp</strong></td>
+              <td><a href="https://wa.me/6285165918835" target="_blank" rel="noopener">Chat →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Script Trial</strong></td>
+              <td><a href="https://www.mediafire.com/file/yz9gpd3qsrpn7tz/MANZFIX4.2.PY/file" target="_blank" rel="noopener">Download →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Termux F-Droid</strong></td>
+              <td><a href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener">Download →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Termux GitHub</strong></td>
+              <td><a href="https://github.com/termux/termux-app/releases" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Termux:X11</strong></td>
+              <td><a href="https://github.com/termux/termux-x11/releases" target="_blank" rel="noopener">Download →</a></td>
+            </tr>
+            <tr>
+              <td><strong>NetHunter Store</strong></td>
+              <td><a href="https://store.nethunter.com/" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Kali NetHunter Docs</strong></td>
+              <td><a href="https://www.kali.org/docs/nethunter/nethunter-rootless/" target="_blank" rel="noopener">Baca →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Kali Installer Script</strong></td>
+              <td><a href="https://github.com/Anon4You/kalilinux" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+            <tr>
+              <td><strong>Termux Linux Setup</strong></td>
+              <td><a href="https://github.com/newgsmbx/termux-linux-setup" target="_blank" rel="noopener">Buka →</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <div>MANZA-CYBER TEST — <span class="acid">CYBER ARCHIVE</span></div>
+      <div>v3.2 // MMXXVI</div>
+    </footer>
+  </main>
+</section>
+
+<script>
+/* =========================================================
+   MANZA-CYBER TEST — App Logic (Session Persisted)
+   ========================================================= */
+(() => {
+  "use strict";
+
+  /* -------------------------------------------------------
+     ACCESS KEY
+  ------------------------------------------------------- */
+  const ACCESS_KEY = "user123";
+
+  /* -------------------------------------------------------
+     SESSION STORAGE
+     Simpan status login agar tidak balik ke input pw
+  ------------------------------------------------------- */
+  const SESSION_KEY  = "manza_cyber_session";
+  const PAGE_KEY     = "manza_cyber_page";
+
+  const saveSession = () => {
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
+        ok: true,
+        t: Date.now()
+      }));
+    } catch (e) {}
+  };
+
+  const clearSession = () => {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(PAGE_KEY);
+    } catch (e) {}
+  };
+
+  const hasSession = () => {
+    try {
+      const raw = localStorage.getItem(SESSION_KEY);
+      if (!raw) return false;
+      const data = JSON.parse(raw);
+      return data && data.ok === true;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  const savePage = (name) => {
+    try { localStorage.setItem(PAGE_KEY, name); } catch (e) {}
+  };
+
+  const loadPage = () => {
+    try { return localStorage.getItem(PAGE_KEY) || "home"; }
+    catch (e) { return "home"; }
+  };
+
+  /* ---------- Refs ---------- */
+  const login        = document.getElementById("login");
+  const dash         = document.getElementById("dash");
+  const authForm     = document.getElementById("authForm");
+  const pwInput      = document.getElementById("password");
+  const pwEye        = document.getElementById("pwEye");
+  const mFill        = document.getElementById("mFill");
+  const mText        = document.getElementById("mText");
+  const logBox       = document.getElementById("log");
+  const submitBtn    = document.getElementById("submitBtn");
+  const submitText   = document.getElementById("submitText");
+  const exitBtn      = document.getElementById("exitBtn");
+  const fabBtn       = document.getElementById("fabBtn");
+  const menuPanel    = document.getElementById("menuPanel");
+  const menuBackdrop = document.getElementById("menuBackdrop");
+  const navTabs      = document.querySelectorAll("#nav .tab");
+  const pages        = document.querySelectorAll(".page");
+  const prog         = document.getElementById("prog");
+
+  /* ---------- Utility ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  function addLog(msg, type = "") {
+    const el = document.createElement("div");
+    el.className = "ln" + (type ? " " + type : "");
+    el.innerHTML = `<span class="arw">›</span> ${msg}`;
+    logBox.appendChild(el);
+    logBox.scrollTop = logBox.scrollHeight;
+  }
+
+  /* ---------- Strength meter ---------- */
+  const LABELS = ["—", "LEMAH", "SEDANG", "KUAT", "SANGAT KUAT"];
+  const COLORS = ["", "#ff6a3d", "#f5c563", "#5eead4", "#a855f7"];
+  const WIDTHS = ["0%", "25%", "50%", "75%", "100%"];
+
+  function strength(pw) {
+    if (!pw) return 0;
+    let s = 0;
+    if (pw.length >= 6)  s++;
+    if (pw.length >= 10) s++;
+    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+    if (/\d/.test(pw)) s++;
+    if (/[^A-Za-z0-9]/.test(pw)) s++;
+    return Math.min(s, 4);
+  }
+
+  function updateMeter() {
+    const pw = pwInput.value;
+    const s = strength(pw);
+    mFill.style.width      = pw ? WIDTHS[s] : "0%";
+    mFill.style.background = pw ? COLORS[s] : "transparent";
+    mFill.style.boxShadow  = pw ? `0 0 8px ${COLORS[s]}` : "none";
+    mText.textContent      = LABELS[s];
+    mText.style.color      = pw ? COLORS[s] : "var(--text-dim)";
+  }
+
+  pwInput.addEventListener("input", updateMeter);
+
+  /* ---------- Toggle password visibility ---------- */
+  pwEye.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isPw = pwInput.type === "password";
+    pwInput.type = isPw ? "text" : "password";
+    pwEye.classList.toggle("on", isPw);
+    pwInput.focus();
+  });
+
+  /* ---------- Screen switch ---------- */
+  function switchScreen(from, to, instant = false) {
+    if (from === to) return;
+    from.classList.remove("on");
+    const delay = instant ? 0 : 280;
+    setTimeout(() => {
+      to.classList.add("on");
+      if (to === dash) {
+        dash.scrollTop = 0;
+        prog.style.width = "0%";
+      }
+    }, delay);
+  }
+
+  /* ---------- Navigation ---------- */
+  function goTo(pageName, save = true) {
+    // Cegah page name invalid
+    const target = document.getElementById("p-" + pageName);
+    if (!target) pageName = "home";
+
+    navTabs.forEach((t) => t.classList.toggle("active", t.dataset.page === pageName));
+    pages.forEach((p) => p.classList.toggle("on", p.id === "p-" + pageName));
+    dash.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (save) savePage(pageName);
+  }
+
+  navTabs.forEach((tab) => {
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      goTo(tab.dataset.page);
+      closeMenu();
+    });
+  });
+
+  /* ---------- Internal card links (data-goto) ---------- */
+  document.querySelectorAll("[data-goto]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      goTo(el.dataset.goto);
+      closeMenu();
+    });
+  });
+
+  /* ---------- Menu toggle ---------- */
+  function openMenu() {
+    fabBtn.classList.add("open");
+    menuPanel.classList.add("open");
+    menuBackdrop.classList.add("on");
+  }
+
+  function closeMenu() {
+    fabBtn.classList.remove("open");
+    menuPanel.classList.remove("open");
+    menuBackdrop.classList.remove("on");
+  }
+
+  fabBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    menuPanel.classList.contains("open") ? closeMenu() : openMenu();
+  });
+
+  menuBackdrop.addEventListener("click", closeMenu);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  /* ---------- Enter dashboard (used by login + auto-login) ---------- */
+  function enterDashboard(instant = false) {
+    const page = loadPage();
+    goTo(page, false);
+
+    if (instant) {
+      login.classList.remove("on");
+      dash.classList.add("on");
+      dash.scrollTop = 0;
+    } else {
+      switchScreen(login, dash);
+    }
+  }
+
+  /* ---------- Login handler ---------- */
+  authForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const val = pwInput.value.trim();
+
+    if (!val) {
+      addLog("access key kosong — ditolak.", "err");
+      pwInput.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitText.textContent = "Verifying...";
+
+    addLog("session handshake dimulai...");
+    await sleep(340);
+
+    addLog("hashing access key...");
+    await sleep(400);
+
+    addLog("verifikasi terhadap vault...");
+    await sleep(480);
+
+    if (val === ACCESS_KEY) {
+      addLog("akses diterima.", "ok");
+      saveSession();               // ← simpan session
+      await sleep(180);
+      addLog("membuka arsip...", "ok");
+      await sleep(440);
+      enterDashboard(false);
+    } else {
+      addLog("akses ditolak — key tidak valid.", "err");
+      await sleep(160);
+      addLog("hint: periksa kembali.", "warn");
+      pwInput.value = "";
+      updateMeter();
+      pwInput.focus();
+    }
+
+    submitBtn.disabled = false;
+    submitText.textContent = "Unlock";
+  });
+
+  /* ---------- Logout ---------- */
+  exitBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    closeMenu();
+    clearSession();              // ← hapus session
+    pwInput.value = "";
+    updateMeter();
+
+    navTabs.forEach((t) => t.classList.toggle("active", t.dataset.page === "home"));
+    pages.forEach((p) => p.classList.toggle("on", p.id === "p-home"));
+
+    switchScreen(dash, login);
+    await sleep(300);
+    pwInput.focus();
+  });
+
+  /* ---------- Scroll progress ---------- */
+  dash.addEventListener("scroll", () => {
+    const h = dash.scrollHeight - dash.clientHeight;
+    const p = h > 0 ? (dash.scrollTop / h) * 100 : 0;
+    prog.style.width = p + "%";
+  });
+
+  /* ---------- Prevent "back" keluar dari dashboard ---------- */
+  // Ganti URL di history supaya tombol back tidak keluar ke halaman sebelumnya
+  try {
+    history.replaceState({ app: "manza" }, "", location.href);
+    window.addEventListener("popstate", () => {
+      history.pushState({ app: "manza" }, "", location.href);
+      if (hasSession()) {
+        // Kalau sudah login, biarkan user tetap di dashboard
+        closeMenu();
+      }
+    });
+  } catch (e) {}
+
+  /* ---------- AUTO-LOGIN saat halaman dibuka ---------- */
+  if (hasSession()) {
+    // Langsung masuk tanpa animasi
+    enterDashboard(true);
+    // Fokus hilang dari input pw
+    setTimeout(() => { try { document.activeElement.blur(); } catch (e) {} }, 50);
+  } else {
+    updateMeter();
+    pwInput.focus();
+  }
+})();
+</script>
+</body>
+</html>
